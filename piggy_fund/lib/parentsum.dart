@@ -20,8 +20,7 @@ class _ParentManager extends State<ParentSum> {
   @override
   void initState() {
     _products.add(widget.startingProduct);
-    super
-        .initState(); //overrides built in method but super. always refers to base class you're extending.
+    super.initState(); //overrides built in method but super. always refers to base class you're extending.
 //super makes it so it's called there even if you're overriding it.
   }
 
@@ -37,8 +36,7 @@ class _ParentManager extends State<ParentSum> {
             onPressed: () {
               setState(() {
                 //setState allows the re-rendering of the app
-                _products.add(
-                    'Child'); //this will bring another card with "advanced food tester
+                _products.add('Child'); //this will bring another card with "advanced food tester
               });
 
               //change some data dynamically turned into card widgets

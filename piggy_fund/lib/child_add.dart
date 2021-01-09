@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 
+import 'package:piggy_fund/parent_child_details.dart';
+import 'model/child.dart';
+
+Child c1 = Child(0, "Carl", "Wang", 200.00, 0.05, 15.00, new DateTime.utc(2020, 1, 1), 60, 14);
+
 class Products extends StatelessWidget {
   //everything in this class is not changeable because its stateless
   final List<String>
@@ -15,9 +20,18 @@ class Products extends StatelessWidget {
       children: products
           .map(
             (element) => Card(
-              child: Column(
+              child: Row(
                 children: <Widget>[
-                  Text(element)
+                  Text(element),
+                  ElevatedButton(
+                    child: Text('Edit'),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ChildDetails(item: c1,)),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

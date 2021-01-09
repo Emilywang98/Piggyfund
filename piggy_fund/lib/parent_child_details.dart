@@ -108,7 +108,11 @@ class ChildDetails extends StatelessWidget {
                 // ),
               ]
           ),
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Colors.green,
+      ),
     );
   }
 }

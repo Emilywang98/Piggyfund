@@ -19,7 +19,7 @@ class TransactionList extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Text("${items[index].transactionAmt.toString()}"),
+                Text("${items[index].transactionAmt.toStringAsFixed(2)}"),
                 Text("${items[index].type.toString()}"),
                 // Text("${items[index].date.toString()}"),
               ],
