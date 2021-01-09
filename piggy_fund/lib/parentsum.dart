@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './products.dart';
+import './child_add.dart';
 
 class ParentSum extends StatefulWidget {
   final String startingProduct;
@@ -8,7 +8,7 @@ class ParentSum extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     //TODO: implement createState
-    return _ParentManger();
+    return _ParentManager();
   }
 }
 
