@@ -1,2 +1,0 @@
-# Piggyfund
-Shehacks V
