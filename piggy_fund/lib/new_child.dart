@@ -70,6 +70,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             RaisedButton(
               onPressed: () => submit(),
+              child: Text('Save'),
             ),
           ],
         ),
