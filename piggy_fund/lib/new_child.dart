@@ -25,12 +25,16 @@ class _MyCustomFormState extends State<MyCustomForm> {
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
   final myController = TextEditingController();
+  final myController1 = TextEditingController();
+  final myController2 = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
     myController.addListener(_printLatestValue);
+    myController1.addListener(_printLatestValue);
+    myController2.addListener(_printLatestValue);
   }
 
   @override
@@ -38,6 +42,10 @@ class _MyCustomFormState extends State<MyCustomForm> {
     // Clean up the controller when the widget is removed from the widget tree.
     // This also removes the _printLatestValue listener.
     myController.dispose();
+    super.dispose();
+    myController1.dispose();
+    super.dispose();
+    myController2.dispose();
     super.dispose();
   }
 
@@ -70,7 +78,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
               ),
             ),
             TextField(
-              controller: myController,
+              controller: myController1,
               obscureText: false,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -83,7 +91,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
               ),
             ),
             TextField(
-              controller: myController,
+              controller: myController2,
               obscureText: false,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
