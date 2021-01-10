@@ -6,12 +6,13 @@ import 'dart:async';
 import './parent_child_details.dart';
 import './model/child.dart';
 import 'model/transaction.dart';
+import 'child_summary.dart';
 
-Transaction t1 = Transaction(0, 0, new DateTime.utc(2020, 1, 1), 215.00, 15.00, transactionType.allowance);
-Transaction t2 = Transaction(0, 0, new DateTime.utc(2020, 1, 1), 200.00, 15.00, transactionType.withdrawal);
+Transaction t1 = Transaction(0, 0, new DateTime.utc(2020, 1, 1), 230.00, 15.00, transactionType.allowance);
+Transaction t2 = Transaction(0, 0, new DateTime.utc(2020, 1, 1), 215.00, 15.00, transactionType.withdrawal);
 List<Transaction> transactionList = [t1, t2];
 
-Child c1 = Child(0, "Carl", "Wang", 200.00, 0.05, 15.00,
+Child c1 = Child(0, "Jane", "Wang", 200.00, 10, 50.00,
     new DateTime.utc(2020, 1, 1), 60, 14, transactionList);
 
 class Terminal {
@@ -40,6 +41,7 @@ class _UserInputState extends State<UserInput> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Card(
+        color: oxfordBlue,
         child: Column(
           children: <Widget>[
             TextField(
@@ -117,19 +119,22 @@ class _MyTerminalState extends State<MyTerminal> {
                   );
                 },
                 child: Card(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                      Container(
-                          child: Text(node.id,
-                              style: TextStyle(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.bold))),
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      color: oxfordBlue,
+                      child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                            Container(
+                                child: Text(node.id,
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontWeight: FontWeight.bold))),
 
-                      Text(node
-                          .source), //how do i do a space between interest rate and allowance?
-                      Text(node.newstories.toString())
-                    ])));
+                            Text(node
+                                .source), //how do i do a space between interest rate and allowance?
+                            Text(node.newstories.toString())
+                    ]))));
           }).toList(),
         ),
       ),
@@ -192,6 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Container(
+        color: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -224,9 +230,21 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             Divider(color: Colors.black),
-            Expanded(flex: 1, child: MyTerminal()),
-            Expanded(flex: 1, child: UserInput()),
-            Expanded(flex: 1, child: Image.asset("piggy_fund/assets/pig.jpeg")),
+            Expanded(flex: 2, child: MyTerminal()),
+            Expanded(flex: 2, child: UserInput()),
+            Expanded(
+                flex: 1,
+                child: GestureDetector(
+                    child: Image.asset("assets/pig.jpeg"),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ChildSummary(item: c1)),
+                      );
+                    },
+                )
+            ),
           ])));
 //extends inherits from another class
 //method called build - draw a widget using the build function

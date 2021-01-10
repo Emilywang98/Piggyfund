@@ -44,7 +44,7 @@ class _NewTransaction extends State<NewTransaction>{
     double amt = double.parse(widget.transactionAmt);
     widget.item.balance -= amt;
 
-    Transaction newTransaction = Transaction(0, 0, new DateTime.utc(2020, 1, 1), widget.item.balance, amt, transactionType.withdrawal);
+    Transaction newTransaction = Transaction(0, 0, new DateTime.now(), widget.item.balance, amt, transactionType.withdrawal);
     widget.item.transactions.add(newTransaction);
 
     Navigator.pop(context, widget.item);

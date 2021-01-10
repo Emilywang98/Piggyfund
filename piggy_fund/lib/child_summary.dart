@@ -1,10 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:piggy_fund/transaction_list.dart';
 import 'package:piggy_fund/new_transaction.dart';
+import 'package:piggy_fund/transaction_list.dart';
 import 'model/child.dart';
-import 'model/transaction.dart';
 import 'edit_child.dart';
 
 const oxfordBlue = const Color(0xFF040027);
@@ -12,14 +11,14 @@ const mikadoYellow = const Color(0xffffc600);
 const pictorialCarmine = const Color(0xFFca054d);
 const mediumPurple = const Color(0xFF5005CA);
 
-class ChildDetails extends StatefulWidget{
+class ChildSummary extends StatefulWidget{
   Child item;
-  ChildDetails({Key key, this.item}) : super(key: key);
+  ChildSummary({Key key, this.item}) : super(key: key);
   @override
-  _ChildDetailsState createState() => _ChildDetailsState();
+  _ChildSummaryState createState() => _ChildSummaryState();
 }
 
-class _ChildDetailsState extends State<ChildDetails> {
+class _ChildSummaryState extends State<ChildSummary> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +26,8 @@ class _ChildDetailsState extends State<ChildDetails> {
         title: Text("${widget.item.firstName.toString()} ${widget.item.lastName.toString()}"),
         backgroundColor: oxfordBlue,
         centerTitle: true,
+        actions: <Widget>[],
+        leading: new Container()
       ),
       body: Stack(
         children: <Widget>[
@@ -157,7 +158,7 @@ class _ChildDetailsState extends State<ChildDetails> {
         ),
       ]),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.create_rounded),
+        child: Icon(Icons.account_balance_wallet),
         backgroundColor: pictorialCarmine,
         onPressed: (){
           _awaitAddTransaction(context);
@@ -168,7 +169,7 @@ class _ChildDetailsState extends State<ChildDetails> {
   void _awaitAddTransaction(BuildContext context) async{
     final result = await Navigator.push(
         context,
-        MaterialPageRoute(builder: (context)=> EditChild(item: widget.item))
+        MaterialPageRoute(builder: (context)=> NewTransaction(item: widget.item))
     );
     setState((){
       widget.item = result;
