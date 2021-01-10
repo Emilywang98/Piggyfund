@@ -115,25 +115,33 @@ class _ChildDetailsState extends State<ChildDetails> {
                             )
                         ),
                     ),
-                    Text("Monthly Summary"),
+                    Text("Monthly Summary", style: TextStyle(fontWeight: FontWeight.bold)),
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 15),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Money in:        \$100.00"),
-                          Text("Money out:      \$20.00"),
+                          Text("Money in:        \$100.00", style: Theme.of(context).textTheme.headline3),
+                          Text("Money out:      \$20.00", style: Theme.of(context).textTheme.headline3),
                           Text("Interest gain:   \$5.00", style: Theme.of(context).textTheme.headline3),
                         ],
                       ),
                     ),
-                    Column(
-                      children: [
-                        Text("Balance"),
-                        Text("\$ ${widget.item.balance.toString()}"),
-                      ],
+                    Text("All Time Summary", style: TextStyle(fontWeight: FontWeight.bold)),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 15),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Money in:        \$100.00", style: Theme.of(context).textTheme.headline3),
+                          Text("Money out:      \$20.00", style: Theme.of(context).textTheme.headline3),
+                          Text("Interest gain:   \$5.00", style: Theme.of(context).textTheme.headline3),
+                        ],
+                      ),
                     ),
+
 
                     Text(
                       "Transactions",

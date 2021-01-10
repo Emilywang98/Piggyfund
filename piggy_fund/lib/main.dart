@@ -5,9 +5,14 @@ import './new_child.dart';
 import 'dart:async';
 import './parent_child_details.dart';
 import './model/child.dart';
+import 'model/transaction.dart';
+
+Transaction t1 = Transaction(0, 0, new DateTime.utc(2020, 1, 1), 215.00, 15.00, transactionType.allowance);
+Transaction t2 = Transaction(0, 0, new DateTime.utc(2020, 1, 1), 200.00, 15.00, transactionType.withdrawal);
+List<Transaction> transactionList = [t1, t2];
 
 Child c1 = Child(0, "Carl", "Wang", 200.00, 0.05, 15.00,
-    new DateTime.utc(2020, 1, 1), 60, 14);
+    new DateTime.utc(2020, 1, 1), 60, 14, transactionList);
 
 class Terminal {
   final String id;
@@ -96,34 +101,6 @@ class _MyTerminalState extends State<MyTerminal> {
     });
   }
 
-const oxfordBlue = const Color(0xFF040027);
-const mikadoYellow = const Color(0xffffc600);
-const pictorialCarmine = const Color(0xFFca054d);
-const mediumPurple = const Color(0xFF5005CA);
-
-main() {
-  runApp(MaterialApp(
-    title: 'PiggyFund',
-    theme: ThemeData(
-      // Define the default brightness and colors.
-      brightness: Brightness.dark,
-      primaryColor: oxfordBlue,
-      accentColor: pictorialCarmine,
-
-      canvasColor: oxfordBlue,
-
-      // Define the default TextTheme. Use this to specify the default
-      // text styling for headlines, titles, bodies of text, and more.
-      textTheme: TextTheme(
-        headline1: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-        headline2: TextStyle(fontSize: 14.0, color: mikadoYellow),
-        headline3: TextStyle(fontSize: 14.0, color: Colors.white),
-        headline4: TextStyle(fontSize: 32.0, color: Colors.white, fontWeight: FontWeight.bold),
-        bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-      ),
-    ),
-    home: MyApp(),
-  ));
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -160,6 +137,12 @@ main() {
   }
 }
 
+
+const oxfordBlue = const Color(0xFF040027);
+const mikadoYellow = const Color(0xffffc600);
+const pictorialCarmine = const Color(0xFFca054d);
+const mediumPurple = const Color(0xFF5005CA);
+
 void main() {
   runApp(MyApp());
 }
@@ -170,8 +153,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+          // Define the default brightness and colors.
+          brightness: Brightness.dark,
+          primaryColor: oxfordBlue,
+          accentColor: pictorialCarmine,
+
+          canvasColor: oxfordBlue,
+
+          // Define the default TextTheme. Use this to specify the default
+          // text styling for headlines, titles, bodies of text, and more.
+          textTheme: TextTheme(
+          headline1: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+          headline2: TextStyle(fontSize: 14.0, color: mikadoYellow),
+          headline3: TextStyle(fontSize: 14.0, color: Colors.white),
+          headline4: TextStyle(fontSize: 32.0, color: Colors.white, fontWeight: FontWeight.bold),
+          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+        ),
       ),
       home: MyHomePage(title: 'Parent Summary Page'),
     );
@@ -230,59 +227,18 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(flex: 1, child: MyTerminal()),
             Expanded(flex: 1, child: UserInput()),
             Expanded(flex: 1, child: Image.asset("piggy_fund/assets/pig.jpeg")),
-          ],
+          ])));
 //extends inherits from another class
 //method called build - draw a widget using the build function
 //takes one argument called context, thing returned on the screen
-  build(context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Parent Portal'),
-        ),
-        body: ParentSum('Child'),
-      );
-      ),
-    );
-  }
-}
-
-class FirstRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Summary Page'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          child: Text('Edit'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SecondRoute()),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class SecondRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Edit Child"),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Save'),
-        ),
-      ),
-    );
-  }
-}
+//   build(context) {
+//     return Scaffold(
+//         appBar: AppBar(
+//           title: Text('Parent Portal'),
+//         ),
+//         body: ParentSum('Child'),
+//       );
+//       ),
+//     );
+//   }
+}}
