@@ -35,15 +35,14 @@ class _ParentManager extends State<ParentSum> {
           margin: EdgeInsets.all(
               8.0), //8.0 is a float that represents space in all directions around button
           child: RaisedButton(
-            child: Text('Add another child'),
-               onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AddChild(
-                                )),
-           ); //the onpressed function directs the button!
-          ),
+              child: Text('Add another child'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyCustomForm()),
+                );
+              } //the onpressed function directs the button!
+              ),
         ),
         Products(_products)
       ],

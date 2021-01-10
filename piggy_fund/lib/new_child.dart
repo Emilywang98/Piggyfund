@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import './child_add.dart';
+import './parentsum.dart';
 
-class AddChild extends StatefulWidget {
-  final String childAddition;
+/*class AddChild extends StatefulWidget {
+  String childAddition;
 
   ParentSum(this.childAddition);
   @override
@@ -10,7 +11,7 @@ class AddChild extends StatefulWidget {
     //TODO: implement createState
     return MyCustomForm();
   }
-}
+}*/
 
 // Define a custom Form widget.
 class MyCustomForm extends StatefulWidget {
@@ -26,14 +27,57 @@ class _MyCustomFormState extends State<MyCustomForm> {
   final myController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+
+    myController.addListener(_printLatestValue);
+  }
+
+  @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
+    // Clean up the controller when the widget is removed from the widget tree.
+    // This also removes the _printLatestValue listener.
     myController.dispose();
     super.dispose();
   }
 
+  _printLatestValue() {
+    print("Second text field: ${myController.text}");
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Fill this out in the next step.
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Retrieve Text Input'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: <Widget>[
+            TextField(
+              controller: myController,
+              obscureText: false,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    const Radius.circular(12.0),
+                  ),
+                ),
+                labelText: 'Name',
+                labelStyle: TextStyle(color: Colors.black.withOpacity(0.8)),
+              ),
+            ),
+            RaisedButton(
+              onPressed: () => submit(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void submit() {
+    Navigator.of(context).pop(myController.text);
   }
 }

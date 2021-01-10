@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import './parentsum.dart';
+import './new_child.dart';
+import './child_add.dart';
 
 main() {
   runApp(MyApp());
