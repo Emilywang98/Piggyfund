@@ -173,16 +173,32 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               children: <Widget>[
                 Expanded(
-                  child: Text('Name', textAlign: TextAlign.center),
+                  child: Text('Name',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                          color: Colors.blue[700])),
                 ),
                 Expanded(
-                  child: Text('Interest rate (%)', textAlign: TextAlign.center),
+                  child: Text('Interest rate (%)',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                          color: Colors.blue[700])),
                 ),
                 Expanded(
-                  child: Text('Weekly Allowance', textAlign: TextAlign.center),
+                  child: Text('Weekly Allowance',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                          color: Colors.blue[700])),
                 ),
               ],
             ),
+            Divider(color: Colors.black),
             Expanded(flex: 1, child: MyTerminal()),
             Expanded(flex: 1, child: UserInput()),
             Expanded(flex: 1, child: Image.asset("piggy_fund/assets/pig.jpeg")),
