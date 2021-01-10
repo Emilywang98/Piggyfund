@@ -21,8 +21,10 @@ class Products extends StatelessWidget {
           .map(
             (element) => Card(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Text(element),
+                  Text("hello emily"),
                   ElevatedButton(
                     child: Text('Edit'),
                     onPressed: () {

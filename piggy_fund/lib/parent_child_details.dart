@@ -10,6 +10,11 @@ Transaction t1 = Transaction(0, 0, new DateTime.utc(2020, 1, 1), 215.00, 15.00, 
 Transaction t2 = Transaction(0, 0, new DateTime.utc(2020, 1, 1), 200.00, 15.00, transactionType.withdrawal);
 List<Transaction> transactionList = [t1, t2];
 
+const oxfordBlue = const Color(0xFF040027);
+const mikadoYellow = const Color(0xffffc600);
+const pictorialCarmine = const Color(0xFFca054d);
+const mediumPurple = const Color(0xFF5005CA);
+
 class ChildDetails extends StatelessWidget {
   ChildDetails({Key key, this.item}) : super(key: key);
   final Child item;
@@ -17,98 +22,109 @@ class ChildDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${this.item.firstName.toString()} ${this.item.lastName.toString()}"),
-        backgroundColor: Colors.transparent,
+        title: Text("${this.item.firstName.toString()} ${this.item.lastName.toString()}", style: TextStyle(color: pictorialCarmine)),
+        backgroundColor: oxfordBlue,
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          physics: ScrollPhysics(),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                  Container(
+      body: Stack(
+        children: <Widget>[
+          new Container(
+            decoration: new BoxDecoration(
+                color: oxfordBlue
+            ),
+          ),
+          SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            physics: ScrollPhysics(),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                    Container(
+                          padding: EdgeInsets.all(5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: <Widget> [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Text("interest rate", style: Theme.of(context).textTheme.headline2),
+                                        Text("${this.item.interestRate.toString()}% / year", style: Theme.of(context).textTheme.headline3),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Text("weekly allowance", style: Theme.of(context).textTheme.headline2),
+                                        Text("\$ ${this.item.allowanceAmt.toString()}/${this.item.allowanceRate.toString()} days", style: Theme.of(context).textTheme.headline3),
+                                      ],
+                                    ),
+                                  ]
+                              ),
+                            ]
+                          )
+                      ),
+                    Container(
                         padding: EdgeInsets.all(5),
+                        margin: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          color: Colors.blueGrey,
+                        ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
+                            mainAxisAlignment: MainAxisAlignment.start,
+                          children:<Widget>[
                             Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: <Widget> [
-                                  Text("${this.item.interestRate.toString()}% Interest"),
-                                  Text("\$ ${this.item.allowanceAmt.toString()}/${this.item.allowanceRate.toString()} days"),
-                                ]
-                            ),
+                              children: [
+                                Text("Balance"),
+                                Text("\$ ${this.item.balance.toString()}"),
+                              ],
+                            )
                           ]
                         )
                     ),
-                  Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        color: Colors.blueGrey,
-                      ),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                        children:<Widget>[
-                          Column(
-                            children: [
-                              Text("Balance"),
-                              Text("\$ ${this.item.balance.toString()}"),
-                            ],
-                          )
-                        ]
-                      )
-                  ),
-                  Container(
-                      child: LineChart(
-                          LineChartData(
-                            titlesData: FlTitlesData(
-                              show: true,
-                              leftTitles: SideTitles(
-                                  reservedSize: 6,
-                                  showTitles: true
-                              )
-                            ),
-                            borderData: FlBorderData(
-                              show: false
-                            ),
-                            lineBarsData: linesBarData1(),
-                          )
-                      ),
-                  ),
-                  Text("Summary"),
-                  Column(
-                    children: [
-                      Text("Balance"),
-                      Text("\$ ${this.item.balance.toString()}"),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text("Balance"),
-                      Text("\$ ${this.item.balance.toString()}"),
-                    ],
-                  ),
+                    Container(
+                        child: LineChart(
+                            LineChartData(
+                              titlesData: FlTitlesData(
+                                show: true,
+                                leftTitles: SideTitles(
+                                    reservedSize: 6,
+                                    showTitles: true
+                                )
+                              ),
+                              borderData: FlBorderData(
+                                show: false
+                              ),
+                              lineBarsData: linesBarData1(),
+                            )
+                        ),
+                    ),
+                    Text("Summary"),
+                    Column(
+                      children: [
+                        Text("Balance"),
+                        Text("\$ ${this.item.balance.toString()}"),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text("Balance"),
+                        Text("\$ ${this.item.balance.toString()}"),
+                      ],
+                    ),
 
-                  Text("Transactions"),
-                  TransactionList(items: transactionList)
-                //   Container(
-                //       padding: EdgeInsets.all(5),
-                //       child: Column(
-                //           mainAxisAlignment: MainAxisAlignment.start,
-                //           children: <Widget>[
-                //
-                //             Expanded(child:TransactionList(items: transactionList))
-                //           ])
-                // ),
-              ]
-          ),
-      ),
+                    Text("Transactions"),
+                    TransactionList(items: transactionList)
+                ]
+            ),
+        ),
+      ]),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.green,

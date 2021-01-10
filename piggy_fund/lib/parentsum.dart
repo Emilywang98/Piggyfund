@@ -26,7 +26,6 @@ class _ParentManager extends State<ParentSum> {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: implement build
     return Column(
       children: [
         Container(
