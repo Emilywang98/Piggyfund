@@ -185,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Expanded(flex: 1, child: MyTerminal()),
             Expanded(flex: 1, child: UserInput()),
-            Image.asset('assets/pig.jpg'),
+            Expanded(flex: 1, child: Image.asset("piggy_fund/assets/pig.jpeg")),
           ],
         ),
       ),
