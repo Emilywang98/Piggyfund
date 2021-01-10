@@ -4,7 +4,8 @@ import 'package:flutter/semantics.dart';
 import 'package:piggy_fund/parent_child_details.dart';
 import 'model/child.dart';
 
-Child c1 = Child(0, "Carl", "Wang", 200.00, 0.05, 15.00, new DateTime.utc(2020, 1, 1), 60, 14);
+Child c1 = Child(0, "Carl", "Wang", 200.00, 0.05, 15.00,
+    new DateTime.utc(2020, 1, 1), 60, 14);
 
 class Products extends StatelessWidget {
   //everything in this class is not changeable because its stateless
@@ -30,7 +31,10 @@ class Products extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ChildDetails(item: c1,)),
+                        MaterialPageRoute(
+                            builder: (context) => ChildDetails(
+                                  item: c1,
+                                )),
                       );
                     },
                   ),
