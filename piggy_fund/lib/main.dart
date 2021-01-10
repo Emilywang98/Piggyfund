@@ -166,12 +166,26 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Text('Name', textAlign: TextAlign.center),
+                ),
+                Expanded(
+                  child: Text('Interest rate (%)', textAlign: TextAlign.center),
+                ),
+                Expanded(
+                  child: Text('Weekly Allowance', textAlign: TextAlign.center),
+                ),
+              ],
+            ),
             Expanded(flex: 1, child: MyTerminal()),
             Expanded(flex: 1, child: UserInput()),
+            Image.asset('assets/pig.jpg'),
           ],
         ),
       ),
