@@ -49,11 +49,12 @@ class _MyCustomFormState extends State<MyCustomForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Retrieve Text Input'),
+        title: Text('Add Another Child'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             TextField(
               controller: myController,
@@ -65,6 +66,32 @@ class _MyCustomFormState extends State<MyCustomForm> {
                   ),
                 ),
                 labelText: 'Name',
+                labelStyle: TextStyle(color: Colors.black.withOpacity(0.8)),
+              ),
+            ),
+            TextField(
+              controller: myController,
+              obscureText: false,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    const Radius.circular(12.0),
+                  ),
+                ),
+                labelText: 'Weekly Allowance',
+                labelStyle: TextStyle(color: Colors.black.withOpacity(0.8)),
+              ),
+            ),
+            TextField(
+              controller: myController,
+              obscureText: false,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    const Radius.circular(12.0),
+                  ),
+                ),
+                labelText: 'Interest Rate',
                 labelStyle: TextStyle(color: Colors.black.withOpacity(0.8)),
               ),
             ),
