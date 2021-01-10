@@ -3,9 +3,14 @@ import 'package:flutter/semantics.dart';
 
 import 'package:piggy_fund/parent_child_details.dart';
 import 'model/child.dart';
+import 'model/transaction.dart';
+
+Transaction t1 = Transaction(0, 0, new DateTime.utc(2020, 1, 1), 215.00, 15.00, transactionType.allowance);
+Transaction t2 = Transaction(0, 0, new DateTime.utc(2020, 1, 1), 200.00, 15.00, transactionType.withdrawal);
+List<Transaction> transactionList = [t1, t2];
 
 Child c1 = Child(0, "Carl", "Wang", 200.00, 0.05, 15.00,
-    new DateTime.utc(2020, 1, 1), 60, 14);
+    new DateTime.utc(2020, 1, 1), 60, 14, transactionList);
 
 class Products extends StatelessWidget {
   //everything in this class is not changeable because its stateless

@@ -1,15 +1,17 @@
+import 'transaction.dart';
 class Child {
-  final int childId;
-  final String firstName;
-  final String lastName;
-  final double balance;
-  final double interestRate;
-  final double allowanceAmt;
-  final DateTime startDate;
-  final int compoundRate; //in days
-  final int allowanceRate; //in days
+  int childId;
+  String firstName;
+  String lastName;
+  double balance;
+  double interestRate;
+  double allowanceAmt;
+  DateTime startDate;
+  int compoundRate; //in days
+  int allowanceRate; //in days
+  List<Transaction> transactions;
 
-  Child(this.childId, this.firstName, this.lastName, this.balance, this.interestRate, this.allowanceAmt, this.startDate, this.compoundRate, this.allowanceRate);
+  Child(this.childId, this.firstName, this.lastName, this.balance, this.interestRate, this.allowanceAmt, this.startDate, this.compoundRate, this.allowanceRate, this.transactions);
 
   factory Child.fromJson(Map<String, dynamic> json) {
     return Child(
@@ -22,6 +24,7 @@ class Child {
       json['startDate'],
       json['compoundRate'],
       json['allowanceRate'],
+      json['transactions']
     );
   }
 }

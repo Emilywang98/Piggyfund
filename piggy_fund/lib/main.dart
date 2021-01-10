@@ -4,8 +4,6 @@ import './parentsum.dart';
 import './new_child.dart';
 import './child_add.dart';
 
-Child c1 = Child(0, "Carl", "Wang", 200.00, 0.05, 15.00, new DateTime.utc(2020, 1, 1), 60, 14);
-
 const oxfordBlue = const Color(0xFF040027);
 const mikadoYellow = const Color(0xffffc600);
 const pictorialCarmine = const Color(0xFFca054d);
@@ -28,7 +26,7 @@ main() {
         headline1: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
         headline2: TextStyle(fontSize: 14.0, color: mikadoYellow),
         headline3: TextStyle(fontSize: 14.0, color: Colors.white),
-        headline4: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+        headline4: TextStyle(fontSize: 32.0, color: Colors.white, fontWeight: FontWeight.bold),
         bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
       ),
     ),
@@ -42,14 +40,12 @@ class MyApp extends StatelessWidget {
 //method called build - draw a widget using the build function
 //takes one argument called context, thing returned on the screen
   build(context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text('Parent Portal'),
         ),
         body: ParentSum('Child'),
-      ),
-    );
+      );
   }
 }
 

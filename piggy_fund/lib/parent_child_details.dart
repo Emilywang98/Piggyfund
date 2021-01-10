@@ -2,27 +2,28 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:piggy_fund/transaction_list.dart';
-
+import 'package:piggy_fund/new_transaction.dart';
 import 'model/child.dart';
 import 'model/transaction.dart';
-
-Transaction t1 = Transaction(0, 0, new DateTime.utc(2020, 1, 1), 215.00, 15.00, transactionType.allowance);
-Transaction t2 = Transaction(0, 0, new DateTime.utc(2020, 1, 1), 200.00, 15.00, transactionType.withdrawal);
-List<Transaction> transactionList = [t1, t2];
 
 const oxfordBlue = const Color(0xFF040027);
 const mikadoYellow = const Color(0xffffc600);
 const pictorialCarmine = const Color(0xFFca054d);
 const mediumPurple = const Color(0xFF5005CA);
 
-class ChildDetails extends StatelessWidget {
+class ChildDetails extends StatefulWidget{
+  Child item;
   ChildDetails({Key key, this.item}) : super(key: key);
-  final Child item;
+  @override
+  _ChildDetailsState createState() => _ChildDetailsState();
+}
+
+class _ChildDetailsState extends State<ChildDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${this.item.firstName.toString()} ${this.item.lastName.toString()}", style: TextStyle(color: pictorialCarmine)),
+        title: Text("${widget.item.firstName.toString()} ${widget.item.lastName.toString()}"),
         backgroundColor: oxfordBlue,
         centerTitle: true,
       ),
@@ -50,19 +51,25 @@ class ChildDetails extends StatelessWidget {
                               Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: <Widget> [
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: [
-                                        Text("interest rate", style: Theme.of(context).textTheme.headline2),
-                                        Text("${this.item.interestRate.toString()}% / year", style: Theme.of(context).textTheme.headline3),
-                                      ],
+                                    Container(
+                                      padding: EdgeInsets.symmetric(vertical: 10),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: [
+                                          Text("interest rate", style: Theme.of(context).textTheme.headline2),
+                                          Text("${widget.item.interestRate.toString()}% / year", style: Theme.of(context).textTheme.headline3),
+                                        ],
+                                      ),
                                     ),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: [
-                                        Text("weekly allowance", style: Theme.of(context).textTheme.headline2),
-                                        Text("\$ ${this.item.allowanceAmt.toString()}/${this.item.allowanceRate.toString()} days", style: Theme.of(context).textTheme.headline3),
-                                      ],
+                                    Container(
+                                      padding: EdgeInsets.symmetric(vertical: 10),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: [
+                                          Text("weekly allowance", style: Theme.of(context).textTheme.headline2),
+                                          Text("\$ ${widget.item.allowanceAmt.toString()}/${widget.item.allowanceRate.toString()} days", style: Theme.of(context).textTheme.headline3),
+                                        ],
+                                      ),
                                     ),
                                   ]
                               ),
@@ -70,25 +77,28 @@ class ChildDetails extends StatelessWidget {
                           )
                       ),
                     Container(
-                        padding: EdgeInsets.all(5),
-                        margin: EdgeInsets.all(5),
+                        padding: EdgeInsets.all(15),
+                        margin: EdgeInsets.symmetric(vertical: 5),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          color: Colors.blueGrey,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: mediumPurple,
                         ),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                           children:<Widget>[
                             Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Balance"),
-                                Text("\$ ${this.item.balance.toString()}"),
+                                Text("balance"),
+                                Text("\$ ${widget.item.balance.toString()}", style: Theme.of(context).textTheme.headline4),
                               ],
                             )
                           ]
                         )
                     ),
                     Container(
+                      padding: EdgeInsets.symmetric(vertical: 10),
                         child: LineChart(
                             LineChartData(
                               titlesData: FlTitlesData(
@@ -105,58 +115,59 @@ class ChildDetails extends StatelessWidget {
                             )
                         ),
                     ),
-                    Text("Summary"),
-                    Column(
-                      children: [
-                        Text("Balance"),
-                        Text("\$ ${this.item.balance.toString()}"),
-                      ],
+                    Text("Monthly Summary"),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 15),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Money in:        \$100.00"),
+                          Text("Money out:      \$20.00"),
+                          Text("Interest gain:   \$5.00", style: Theme.of(context).textTheme.headline3),
+                        ],
+                      ),
                     ),
                     Column(
                       children: [
                         Text("Balance"),
-                        Text("\$ ${this.item.balance.toString()}"),
+                        Text("\$ ${widget.item.balance.toString()}"),
                       ],
                     ),
 
-                    Text("Transactions"),
-                    TransactionList(items: transactionList)
+                    Text(
+                      "Transactions",
+                      style: TextStyle(
+                        color: mikadoYellow,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    TransactionList(items: widget.item.transactions)
                 ]
             ),
         ),
       ]),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        backgroundColor: Colors.green,
+        backgroundColor: pictorialCarmine,
+        onPressed: (){
+          _awaitAddTransaction(context);
+        },
       ),
     );
+  }
+  void _awaitAddTransaction(BuildContext context) async{
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context)=> NewTransaction(item: widget.item))
+    );
+    setState((){
+      widget.item = result;
+    });
   }
 }
 
 List<LineChartBarData> linesBarData1() {
-  final LineChartBarData lineChartBarData1 = LineChartBarData(
-    spots: [
-      FlSpot(1, 1),
-      FlSpot(3, 1.5),
-      FlSpot(5, 1.4),
-      FlSpot(7, 3.4),
-      FlSpot(10, 2),
-      FlSpot(12, 2.2),
-      FlSpot(13, 1.8),
-    ],
-    isCurved: true,
-    colors: [
-      const Color(0xff4af699),
-    ],
-    barWidth: 8,
-    isStrokeCapRound: true,
-    dotData: FlDotData(
-      show: false,
-    ),
-    belowBarData: BarAreaData(
-      show: false,
-    ),
-  );
   final LineChartBarData lineChartBarData2 = LineChartBarData(
     spots: [
       FlSpot(1, 1),
@@ -170,7 +181,7 @@ List<LineChartBarData> linesBarData1() {
     colors: [
       const Color(0xffaa4cfc),
     ],
-    barWidth: 8,
+    barWidth: 3,
     isStrokeCapRound: true,
     dotData: FlDotData(
       show: false,
@@ -191,7 +202,7 @@ List<LineChartBarData> linesBarData1() {
     colors: const [
       Color(0xff27b6fc),
     ],
-    barWidth: 8,
+    barWidth: 3,
     isStrokeCapRound: true,
     dotData: FlDotData(
       show: false,
@@ -202,7 +213,6 @@ List<LineChartBarData> linesBarData1() {
     dashArray: [5,10]
   );
   return [
-    lineChartBarData1,
     lineChartBarData2,
     lineChartBarData3,
   ];
