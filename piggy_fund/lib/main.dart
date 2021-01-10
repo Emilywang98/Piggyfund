@@ -3,6 +3,11 @@ import './parentsum.dart';
 import './new_child.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import './parent_child_details.dart';
+import './model/child.dart';
+
+Child c1 = Child(0, "Carl", "Wang", 200.00, 0.05, 15.00,
+    new DateTime.utc(2020, 1, 1), 60, 14);
 
 class Terminal {
   final String id;
@@ -96,16 +101,30 @@ class _MyTerminalState extends State<MyTerminal> {
     return SingleChildScrollView(
       child: Container(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: terminalNodes.map((node) {
-            return Card(
-                child: Row(children: <Widget>[
-              Container(
-                  child: Text(node.id, style: TextStyle(color: Colors.green))),
-              Column(children: <Widget>[
-                Text(node.source),
-                Text(node.newstories.toString())
-              ])
-            ]));
+            return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ChildDetails(item: c1)),
+                  );
+                },
+                child: Card(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                      Container(
+                          child: Text(node.id,
+                              style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold))),
+
+                      Text(node
+                          .source), //how do i do a space between interest rate and allowance?
+                      Text(node.newstories.toString())
+                    ])));
           }).toList(),
         ),
       ),
